@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva Materia"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/etNombreMateria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la materia"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etProfesor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Profesor"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etSalon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Salón/Aula"
+        android:layout_marginBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/spinnerDia"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnHoraInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:text="Hora Inicio" />
+
+        <Button
+            android:id="@+id/btnHoraFin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:text="Hora Fin" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etNotas"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Notas adicionales (opcional)"
+        android:gravity="top"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnGuardarMateria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Materia"
+        android:textSize="16sp"
+        android:background="#2196F3"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
