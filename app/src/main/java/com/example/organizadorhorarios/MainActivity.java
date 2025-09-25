@@ -1,11 +1,18 @@
 package com.example.organizadorhorarios;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private HorarioAdapter adapter;
+    private DatabaseHelper dbHelper;
     private Button btnAgregarMateria;
 
     @Override
@@ -13,12 +20,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Encontrar el botón
-        btnAgregarMateria = findViewById(R.id.btnAgregarMateria);
+        inicializarVistas();
+        configurarRecyclerView();
+        configurarEventos();
+        cargarMaterias();
+    }
 
-        // Configurar botón
+    private void inicializarVistas() {
+        recyclerView = findViewById(R.id.recyclerViewHorarios);
+        btnAgregarMateria = findViewById(R.id.btnAgregarMateria);
+        dbHelper = new DatabaseHelper(this);
+    }
+
+    private void configurarRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new HorarioAdapter(this::mostrarDetalleMateria);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void configurarEventos() {
         btnAgregarMateria.setOnClickListener(v -> {
-            Toast.makeText(this, "¡Botón funciona!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AgregarMateriaActivity.class);
+            startActivity(intent);
         });
+    }
+
+    private void cargarMaterias() {
+        List<Materia> materias = dbHelper.obtenerMaterias();
+        adapter.actualizarMaterias(materias);
+    }
+
+    private void mostrarDetalleMateria(Materia materia) {
+        Intent intent = new Intent(this, DetalleMateriaActivity.class);
+        intent.putExtra("nombre", materia.getNombre());
+        intent.putExtra("profesor", materia.getProfesor());
+        intent.putExtra("salon", materia.getSalon());
+        intent.putExtra("dia", materia.getDiaSemana());
+        intent.putExtra("horaInicio", materia.getHoraInicio());
+        intent.putExtra("horaFin", materia.getHoraFin());
+        intent.putExtra("notas", materia.getNotas());
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarMaterias();
     }
 }
